@@ -1,0 +1,13 @@
+<ul class="nav nav-tabs">
+  {{#each pages as |page|}}
+    <li class="nav-item">
+      {{#if page.current}}
+        {{#link-to page.route class="nav-link active"}}{{page.text}}{{/link-to}}
+      {{else}}
+      {{#link-to page.route class="nav-link"}}{{page.text}}{{/link-to}}
+      {{/if}}
+    </li>
+  {{/each}}
+</ul>
+
+{{yield}}
