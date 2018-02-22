@@ -1,6 +1,7 @@
 {{!-- Luodaan valikko sivun yläreunaan --}}
 {{navigation-tabs route=currentRoute}}
-
-<button onclick={{action "logout"}}>Kirjaudu ulos</button>
+<div class="content-fluid text-center">
+<button type="button" class="btn btn-primary m-auto" onclick={{action "logout"}}>Kirjaudu ulos</button>
 
 {{outlet}}
+</div>

@@ -1,10 +1,13 @@
 {{!-- Luodaan valikko sivun yläreunaan --}}
 {{navigation-tabs route=currentRoute}}
 
+<div class="content-fluid text-center">
 {{#if session.isAuthenticated}}
     Authenticated
 {{else}}
-    <button onclick={{action "login"}}>Log in to Facebook</button>
+    <button type="button" class="btn btn-primary text-center m-auto" onclick={{action "login"}}>Kirjaudu sisään Facebookilla</button>
 {{/if}}
 
+
 {{outlet}}
+</div>

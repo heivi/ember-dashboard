@@ -1,7 +1,6 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
-import { observer } from '@ember/object';
 
 // Luodaan valikko sivujen välillä siirtymiseen
 export default Component.extend({
