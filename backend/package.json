@@ -1,0 +1,49 @@
+{
+  "name": "dashboard-rest-api",
+  "version": "0.0.1",
+  "author": "Heikki Virekunnas",
+  "description": "REST API for dashboard app",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "*",
+    "cookie-parser": "*",
+    "debug": "*",
+    "express": "*",
+    "faker": "*",
+    "fbgraph": "^1.4.1",
+    "method-override": "*",
+    "mongoose": "*",
+    "nconf": "*",
+    "oauth2orize": "*",
+    "passport": "*",
+    "passport-http": "*",
+    "passport-http-bearer": "*",
+    "passport-oauth2-client-password": "*",
+    "winston": "*"
+  },
+  "jshintConfig": {
+    "curly": true,
+    "eqeqeq": true,
+    "immed": true,
+    "latedef": false,
+    "newcap": false,
+    "noarg": true,
+    "sub": true,
+    "undef": true,
+    "boss": true,
+    "eqnull": true,
+    "strict": false,
+    "scripturl": true,
+    "evil": true,
+    "globals": {
+      "location": true,
+      "printStackTrace": false
+    },
+    "browser": true,
+    "node": true
+  },
+  "license": "MIT"
+}

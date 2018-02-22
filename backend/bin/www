@@ -1,0 +1,15 @@
+#!/usr/bin/env node
+var debug = require('debug')('restapi');
+
+global.__base = __dirname + '/../';
+
+var config = require(__base + 'libs/config');
+var log = require(__base + 'libs/log')(module);
+var app = require(__base + 'app/app');
+
+app.set('port', config.get('port') || 3000);
+
+var server = app.listen(app.get('port'), function() {
+  debug('Express server listening on port ' + server.address().port);
+  log.info('Express server listening on port ' + config.get('port'));
+});
