@@ -1,1 +1,10 @@
+{{!-- Luodaan valikko sivun yläreunaan --}}
+{{navigation-tabs route=currentRoute}}
+
+{{#if session.isAuthenticated}}
+    Authenticated
+{{else}}
+    <button onclick={{action "login"}}>Log in to Facebook</button>
+{{/if}}
+
 {{outlet}}

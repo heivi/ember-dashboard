@@ -20,6 +20,44 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+    },
+    
+    // TODO: set proper CSP
+    contentSecurityPolicy: {
+      'default-src': "*",
+      'script-src': "'self' 'unsafe-inline' 'unsafe-eval' *",
+      'font-src': "'self' *",
+      'connect-src': "'self' *",
+      'img-src': "'self' *",
+      'report-uri':"'localhost' *",
+      'style-src': "'self' 'unsafe-inline' *",
+      'frame-src': "*"
+    },
+    
+    'simple-auth': {
+      authorizer: 'simple-auth-authorizer:oauth2-bearer',
+      authenticationRoute: '/login',
+      routeAfterAuthentication: 'index',
+      crossOriginWhitelist: [
+        "http://localhost:1337"
+      ]
+    },
+
+    'simple-auth-oauth2': {
+      serverTokenEndpoint: "http://localhost:1337/api/auth/facebook"
+    },
+
+    host: 'http://localhost:1337',
+    
+    torii: {
+      sessionServiceName: 'session',
+      providers: {
+        'facebook-connect': {
+          appId: process.env.FACEBOOK_APP_ID,
+          scope: 'email',
+          version: 'v2.4'
+        }
+      }
     }
   };
 
