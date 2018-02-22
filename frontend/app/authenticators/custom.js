@@ -22,6 +22,7 @@ export default OAuth2PasswordGrantAuthenticator.extend({
         //_this.makeRequest("http://localhost:1337/api/auth/facebook", _data).then(function(response) {
         _this.makeRequest(config['simple-auth-oauth2'].serverTokenEndpoint, _data).then(function(response) {
           run(function() {
+            console.log(response);
             // still available?
             // TODO: see https://github.com/simplabs/ember-simple-auth/blob/master/addon/authenticators/oauth2-password-grant.js
             //var expiresAt = _this.absolutizeExpirationTime(response.expires_in);
