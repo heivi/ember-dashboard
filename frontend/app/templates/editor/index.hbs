@@ -1,0 +1,13 @@
+
+  <div class="content-fluid text-center">
+  {{#if empty}}
+    <p>Ei vielä kojelautoja!</p>
+  {{else}}
+    {{#each model.dashboards as |dash|}}
+    <p>Luotu: {{model.created}}</p>
+    {{/each}}
+  {{/if}}
+  
+  {{#link-to 'editor.new'}}Luo uusi kojelauta{{/link-to}}
+  </div>
+{{outlet}}

@@ -12,6 +12,8 @@ var AccessToken = require(__base + 'app/model/accessToken');
 
 var router = express.Router();
 
+fbgraph.setVersion(config.get("fbgraph:version"));
+
 var newTokenValue = function(user) {
   tokenValue = crypto.randomBytes(32).toString('hex');
   return tokenValue;
@@ -20,7 +22,7 @@ var newTokenValue = function(user) {
 router.post('/facebook', function(req, res) {
   if (req.body.facebook_auth_code) {
     fbgraph.setAccessToken(req.body.facebook_auth_code);
-    fbgraph.setAppSecret(config.get('fbgraph.appSecret'));
+    fbgraph.setAppSecret(process.env.FB_APP_SECRET);
 
     fbgraph.get("me?fields=email,name,id&debug=all", {"scope": "email"}, function(err, fbres) {
       if (!err) {

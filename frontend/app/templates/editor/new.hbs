@@ -1,0 +1,8 @@
+<div class="content-fluid text-center">
+  <div class="form-group">
+    <label for="name">Nimi</label>
+    {{input type="text" valueBinding="name" name="name" placeholder="Nimi" class="form-control"}}
+  </div>
+<button type="button" class="btn btn-primary" {{action "saveDashboard"}}>Tallenna</button>
+</div>
+{{outlet}}

@@ -5,6 +5,8 @@ var bodyParser = require('body-parser');
 var passport = require('passport');
 var methodOverride = require('method-override');
 
+require('dotenv').config()
+
 require(__base + 'libs/auth/auth');
 
 var config = require(__base + 'libs/config');
@@ -14,10 +16,12 @@ var oauth2 = require(__base + 'libs/auth/oauth2');
 var api = require(__base + 'app/routes/api');
 var users = require(__base + 'app/routes/users');
 var auth = require(__base + 'app/routes/auth');
+var dashboard = require(__base + 'app/routes/dashboard');
 
 var app = express();
 
 app.use(bodyParser.json());
+app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(methodOverride());
@@ -36,6 +40,7 @@ app.use('/', api);
 app.use('/api', api);
 app.use('/api/users', users);
 app.use('/api/auth', auth);
+app.use('/api/dashboards', dashboard);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next){

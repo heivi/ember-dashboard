@@ -21,6 +21,6 @@
     }
   },
   "fbgraph": {
-    "appSecret": "mysecret"
+    "version": "2.12"
   }
 }

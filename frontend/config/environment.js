@@ -55,7 +55,7 @@ module.exports = function(environment) {
         'facebook-connect': {
           appId: process.env.FACEBOOK_APP_ID,
           scope: 'email',
-          version: 'v2.4'
+          version: 'v2.12'
         }
       }
     }
