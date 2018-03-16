@@ -1,10 +1,11 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var renameIdPlugin = require('mongoose-rename-id');
 
 // Dashboard
 var Dashboard = new Schema({
   // omistaja
-  'user-id': {
+  userId: {
     type: Schema.Types.ObjectId,
     ref: 'User',
     required: true
@@ -19,5 +20,7 @@ var Dashboard = new Schema({
     default: Date.now
   }
 });
+
+Dashboard.plugin(renameIdPlugin({newIdName: 'id'}));
 
 module.exports = mongoose.model('Dashboard', Dashboard);

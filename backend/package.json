@@ -17,6 +17,7 @@
     "fbgraph": "^1.4.1",
     "method-override": "*",
     "mongoose": "*",
+    "mongoose-rename-id": "^1.0.2",
     "nconf": "*",
     "nodemon": "^1.15.1",
     "oauth2orize": "*",

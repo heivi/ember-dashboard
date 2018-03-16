@@ -3,11 +3,12 @@
   {{#if empty}}
     <p>Ei vielä kojelautoja!</p>
   {{else}}
-    {{#each model.dashboards as |dash|}}
-    <p>Luotu: {{model.created}}</p>
+    {{log model}}
+    {{#each model as |dash|}}
+    {{#link-to 'editor'}}{{dash.name}}{{/link-to}}
     {{/each}}
   {{/if}}
-  
+  <br/><br/>  
   {{#link-to 'editor.new'}}Luo uusi kojelauta{{/link-to}}
   </div>
 {{outlet}}

@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var renameIdPlugin = require('mongoose-rename-id');
 
 // Page
 var Page = new Schema({
@@ -12,5 +13,7 @@ var Page = new Schema({
     ref: 'Component'
   }]
 });
+
+Page.plugin(renameIdPlugin({newIdName: 'id'}));
 
 module.exports = mongoose.model('Page', Page);

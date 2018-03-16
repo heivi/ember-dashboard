@@ -5,6 +5,7 @@ var router = express.Router();
 
 var db = require(__base + 'libs/db/mongoose');
 var Dashboard = require(__base + 'app/model/dashboard');
+var Page = require(__base + 'app/model/page');
 
 router.get('/', passport.authenticate('bearer', { session: false }), function (req, res) {
 
@@ -20,7 +21,8 @@ router.get('/', passport.authenticate('bearer', { session: false }), function (r
       populate: { path: 'components'}
     }).exec(function (err, dashboards) {
     if (!err) {
-      return res.json({data: dashboards, meta: {}});
+      return res.json({dashboards: dashboards});
+      //return res.json({data: dashboards, meta: {}});
     } else {
       res.statusCode = 500;
       log.error('Internal error(%d): %s',res.statusCode,err.message);
@@ -39,8 +41,8 @@ router.post('/', passport.authenticate('bearer', { session: false }), function (
   console.log(req.query);
   
   Dashboard.create({
-    'user-id': req.user.userId,
-    'name': req.body.data.attributes.name
+    'userId': req.user.userId,
+    'name': req.body.dashboard.name
   }, function(err, dash) {
     if (err) {
       res.statusCode = 500;
@@ -50,8 +52,7 @@ router.post('/', passport.authenticate('bearer', { session: false }), function (
       });
     } else {
       return res.json({
-        data: dash,
-        meta: {}
+        dashboard: dash
       });
     }
   });

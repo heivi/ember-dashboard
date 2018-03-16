@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var renameIdPlugin = require('mongoose-rename-id');
+
 
 // component
 var Component = new Schema({
@@ -7,16 +9,18 @@ var Component = new Schema({
     type: Date,
     default: Date.now
   },
-  min-width: Number,
-  min-height: Number,
+  minWidth: Number,
+  minHeight: Number,
   width: Number,
   height: Number,
   type: String,
-  data: {},
+  componentData: {},
   name: String,
   public: Boolean,
   triggers: {},
   
 });
+
+Component.plugin(renameIdPlugin({newIdName: 'id'}));
 
 module.exports = mongoose.model('Component', Component);

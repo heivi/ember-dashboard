@@ -7,7 +7,7 @@ export default DS.Model.extend({
   width: DS.attr('number'),
   height: DS.attr('number'),
   type: DS.attr('string'),
-  data: DS.attr(),
+  componentData: DS.attr(),
   name: DS.attr('string'),
   public: DS.attr('boolean'),
   triggers: DS.attr(),
