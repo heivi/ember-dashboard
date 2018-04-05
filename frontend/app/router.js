@@ -12,14 +12,10 @@ Router.map(function() {
   this.route('editor', function() {
     this.route('new');
     this.route('dashboard', { path: '/:dashboard_id' }, function() {
-      this.route('page', function() {
-        this.route('new');
-      });
+      this.route('new');
       this.route('page', { path: '/:page_id' }, function() {
-        this.route('component', function() {
-          this.route('new');
-          this.route('component', { path: '/:component_id' });
-        });
+        this.route('new');
+        this.route('component', { path: '/:component_id' });
         
       });
     });

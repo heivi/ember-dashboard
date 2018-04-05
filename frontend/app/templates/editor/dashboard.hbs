@@ -1,0 +1,20 @@
+
+<div class="content-fluid text-center">
+  <h4>{{model.name}}</h4>
+  {{#each model.pages as |page|}}
+  {{#link-to 'editor.dashboard.page' page.id}}{{page.name}}{{/link-to}}
+  <br>
+  {{/each}}
+<br>
+{{#link-to 'editor.dashboard.new' }}Luo uusi sivu{{/link-to}}
+<br>
+<br>
+<label for="name">Nimi</label>
+{{input type="text" value=name name="name" placeholder="Nimi" class="form-control"}}
+<button type="button" class="btn btn-primary" {{action "updateDash"}}>Tallenna</button>
+
+<br><br>
+<button type="button" class="btn btn-danger" {{action "deleteDash"}}>Poista kojelauta</button>
+<br><br>
+</div>
+{{outlet}}

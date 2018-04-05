@@ -1,10 +1,8 @@
 <div class="content-fluid text-center">
-  <h4>New page</h4>
+  <h4>Uusi komponentti</h4>
   <label for="name">Nimi</label>
   {{input type="text" value=name name="name" placeholder="Nimi" class="form-control"}}
-  <label for="timeout">Näkyvä aika (s)</label>
-  {{input type="number" value=timeout name="timeout" placeholder="60" class="form-control"}}
-<button type="button" class="btn btn-primary" {{action "savePage"}}>Tallenna</button>
+<button type="button" class="btn btn-primary" {{action "saveComponent"}}>Tallenna</button>
 </div>
 
 {{outlet}}

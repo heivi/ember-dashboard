@@ -29,6 +29,14 @@ export default Controller.extend({
       model.set('triggers', this.get('triggers'));
       model.set('classes', this.get('classes'));
       model.save();
+    },
+    deleteComponent() {
+      var model = this.get('model');
+      console.log(model);
+      model.deleteRecord();
+      model.save().then(() => {
+        this.transitionToRoute('editor.dashboard.page')
+      });
     }
   }
 });

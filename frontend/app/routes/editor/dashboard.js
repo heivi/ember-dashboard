@@ -8,5 +8,10 @@ export default Route.extend(AuthenticatedRouteMixin, {
   setupController(controller, model) {
     this._super(controller, model);
     console.log(model.toJSON());
+    if (model != null) {
+      console.log("Setting controller for dash");
+      controller.set('name', model.get('name'));
+      console.log(model.get('name'));
+    }
   }
 });

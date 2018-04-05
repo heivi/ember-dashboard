@@ -1,13 +1,12 @@
 
 <div class="content-fluid text-center">
   <h4>Sivu: {{model.name}}</h4>
-  <h5>Komponentit:</h5>
   {{#each model.components as |component|}}
-  {{#link-to 'editor.dashboard.page.component.component' component.id}}{{component.name}}{{/link-to}}
+  {{#link-to 'editor.dashboard.page.component' component.id}}{{component.name}}{{/link-to}}
   <br>
   {{/each}}
   <br>
-  {{#link-to 'editor.dashboard.page.component.new' }}Luo uusi komponenetti{{/link-to}}
+  {{#link-to 'editor.dashboard.page.new' }}Luo uusi komponenetti{{/link-to}}
   <br>
   <br>
   <label for="name">Nimi</label>
@@ -15,6 +14,9 @@
   <label for="timeout">Näkyvä aika (s)</label>
   {{input type="number" value=timeout name="timeout" placeholder="60" class="form-control"}}
 <button type="button" class="btn btn-primary" {{action "updatePage"}}>Tallenna</button>
-</div>
+
 <br><br>
+<button type="button" class="btn btn-danger" {{action "deletePage"}}>Poista sivu</button>
+<br><br>
+</div>
 {{outlet}}

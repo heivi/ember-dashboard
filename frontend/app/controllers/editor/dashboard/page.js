@@ -14,6 +14,15 @@ export default Controller.extend({
       model.set('timeout', this.get('timeout'));
       model.set('number', this.get('number'));
       model.save();
+    },
+    deletePage() {
+      var model = this.get('model');
+      console.log(model);
+      model.deleteRecord();
+      model.save().then(() => {
+        this.transitionToRoute('editor.dashboard')
+      });
+      
     }
   }
 });

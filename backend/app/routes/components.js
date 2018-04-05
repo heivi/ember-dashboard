@@ -131,4 +131,81 @@ router.put('/:id', passport.authenticate('bearer', { session: false }), function
 
 });
 
+router.get('/:id', passport.authenticate('bearer', { session: false }), function (req, res) {
+
+  var limit = req.query.limit || null;
+  var offset = req.query.offset || null;
+
+  console.log("Getting component:");
+  console.log(req.user.userId);
+
+  Component.findOne({'_id': req.params.id}, null).
+    populate({
+      path: 'page',
+      populate: { path: 'dashboard', model: 'Dashboard'}
+    }).exec(function (err, component) {
+    if (!err) {
+      console.log(component);
+      if (component.page.dashboard.userId != req.user.userId) {
+        console.log("Not your dashboard!");
+        res.statusCode = 401;
+        return res.json({
+          errors: ['Not your dashboard']
+        });
+      }
+      console.log(JSON.stringify(component));
+      component.page = component.page._id;
+      return res.json({components: component});
+      //return res.json({data: dashboards, meta: {}});
+    } else {
+      res.statusCode = 500;
+      log.error('Internal error(%d): %s',res.statusCode,err.message);
+      return res.json({
+        errors: ['Server error']
+      });
+    }
+  });
+});
+
+router.delete('/:id', passport.authenticate('bearer', { session: false }), function (req, res) {
+
+  var limit = req.query.limit || null;
+  var offset = req.query.offset || null;
+
+  console.log("Getting component:");
+  console.log(req.user.userId);
+
+  Component.findOne({'_id': req.params.id}, null).
+    populate({
+      path: 'page',
+      populate: { path: 'dashboard', model: 'Dashboard'}
+    }).exec(function (err, component) {
+    if (!err) {
+      console.log(component);
+      if (component.page.dashboard.userId != req.user.userId) {
+        console.log("Not your dashboard!");
+        res.statusCode = 401;
+        return res.json({
+          errors: ['Not your dashboard']
+        });
+      }
+      console.log(JSON.stringify(component));
+      component.page = component.page._id;
+      component.remove().then((removed) => {
+        console.log("removed");
+        console.log(removed);
+        return res.json({});
+      });
+      //return res.json({components: component});
+      //return res.json({data: dashboards, meta: {}});
+    } else {
+      res.statusCode = 500;
+      log.error('Internal error(%d): %s',res.statusCode,err.message);
+      return res.json({
+        errors: ['Server error']
+      });
+    }
+  });
+});
+
 module.exports = router;
