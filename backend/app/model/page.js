@@ -12,7 +12,17 @@ var Page = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Component'
   }],
-  number: Number
+  number: {
+    type: Number,
+    default: 0
+  },
+  dashboard: {
+    type: Schema.Types.ObjectId,
+    ref: 'Dashboard'
+  },
+  name: {
+    type: String
+  }
 });
 
 Page.plugin(renameIdPlugin({newIdName: 'id'}));

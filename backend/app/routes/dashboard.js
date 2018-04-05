@@ -40,6 +40,13 @@ router.post('/', passport.authenticate('bearer', { session: false }), function (
   console.log(req.body);
   console.log(req.query);
   
+  if (req.body.dashboard.name == null) {
+    res.statusCode = 500;
+    return res.json({
+      errors: ["No name given"]
+    });
+  }
+  
   Dashboard.create({
     'userId': req.user.userId,
     'name': req.body.dashboard.name

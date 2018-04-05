@@ -17,6 +17,7 @@ var api = require(__base + 'app/routes/api');
 var users = require(__base + 'app/routes/users');
 var auth = require(__base + 'app/routes/auth');
 var dashboard = require(__base + 'app/routes/dashboard');
+var page = require(__base + 'app/routes/page');
 
 var app = express();
 
@@ -41,6 +42,7 @@ app.use('/api', api);
 app.use('/api/users', users);
 app.use('/api/auth', auth);
 app.use('/api/dashboards', dashboard);
+app.use('/api/pages', page);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next){

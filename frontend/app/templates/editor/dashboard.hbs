@@ -1,9 +1,0 @@
-
-<div class="content-fluid text-center">
-  <h4>Dahsboard</h4>
-  {{#each model as |page|}}
-  {{#link-to 'editor.page' page.id}}{{page.number}}{{/link-to}}
-  {{/each}}
-{{#link-to 'editor.page.new'}}Luo uusi sivu{{/link-to}}
-</div>
-{{outlet}}

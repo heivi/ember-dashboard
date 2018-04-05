@@ -3,10 +3,12 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 
 export default Route.extend(AuthenticatedRouteMixin, {
   model(params) {
-    return this.get('store').findRecord('dashboard',params.dashboard_id).then(function(dashboard) {
+    this.set('dash',this.modelFor("editor/dashboard"));
+    return this.get('dash');
+    /*return this.get('dash').then(function(dashboard) {
       dashboard.get('pages').find(function(page) {
         return page.get('id') == params.page_id;
       });
-    });
+    });*/
   }
 });

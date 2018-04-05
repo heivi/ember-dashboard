@@ -6,6 +6,7 @@
     {{log model}}
     {{#each model as |dash|}}
     {{#link-to 'editor.dashboard' dash.id}}{{dash.name}}{{/link-to}}
+    <br>
     {{/each}}
   {{/if}}
   <br/><br/>  

@@ -13,24 +13,33 @@ router.post('/', passport.authenticate('bearer', { session: false }), function (
   console.log(req.user.userId);
   console.log(req.body);
   console.log(req.query);
+  console.log(req.params);
   
-  Dashboard.findOne({'userId': req.user.userId, '_id': req.params.id}, null).
+  Dashboard.findOne({'userId': req.user.userId, '_id': req.body.page.dashboard}, null).
+  populate({
+    path: 'pages',
+    populate: { path: 'components'}
+  }).
   exec(function (err, dashboards) {
     if (!err) {
       
-      Page.create().then((page) => {
+      Page.create({
+        dashboard: req.body.page.dashboard,
+        name: req.body.page.name
+      }).then((page) => {
         console.log(dashboards);
+        console.log(page);
         dashboards.pages.push(page);
         dashboards.save().then(() => {
-          return res.json({dashboards: dashboards});
+          return res.json({pages: page});
         });
       }).catch((error) => {
         res.statusCode = 500;
-        log.error('Internal error(%d): %s',res.statusCode,err.message);
+        log.error('Internal error(%d): %s',res.statusCode,error.message);
         return res.json({
           errors: ['Server error']
         });
-      }));
+      });
       
     } else {
       res.statusCode = 500;
