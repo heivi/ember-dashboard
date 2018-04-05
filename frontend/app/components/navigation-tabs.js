@@ -21,13 +21,13 @@ export default Component.extend({
     ];
     console.log(this.get('session.isAuthenticated'))
     if (this.get('session.isAuthenticated') == false) {
-      pages.push({
+      /*pages.push({
         text: "Rekisteröidy",
         route: "register",
         current: computed('params.[]', function(){
           return this.get('params')[0];
         }) == "register"
-      });
+      });*/
       pages.push({
         text: "Kirjaudu",
         route: "login",
