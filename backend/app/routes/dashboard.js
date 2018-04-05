@@ -94,4 +94,32 @@ router.get('/:id', passport.authenticate('bearer', { session: false }), function
   });
 });
 
+router.delete('/:id', passport.authenticate('bearer', { session: false }), function (req, res) {
+
+  var limit = req.query.limit || null;
+  var offset = req.query.offset || null;
+
+  console.log("Getting page:");
+  console.log(req.user.userId);
+
+  Dashboard.findOne({'userId': req.user.userId, '_id': req.params.id}, null).
+    exec(function (err, dash) {
+    if (!err) {
+      dash.remove().then((removed) => {
+        console.log("removed");
+        console.log(removed);
+        return res.json({});
+      });
+      //return res.json({components: component});
+      //return res.json({data: dashboards, meta: {}});
+    } else {
+      res.statusCode = 500;
+      log.error('Internal error(%d): %s',res.statusCode,err.message);
+      return res.json({
+        errors: ['Server error']
+      });
+    }
+  });
+});
+
 module.exports = router;

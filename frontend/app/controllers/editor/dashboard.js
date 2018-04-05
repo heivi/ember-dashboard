@@ -9,6 +9,13 @@ export default Controller.extend({
       console.log(model);
       model.set('name', this.get('name'));
       model.save();
+    },
+    deleteDash() {
+      var model = this.get('model');
+      model.deleteRecord();
+      model.save().then(() => {
+        this.transitionToRoute('editor');
+      });
     }
   }
 });

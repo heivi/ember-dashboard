@@ -13,7 +13,9 @@ export default Controller.extend({
         dashboard: this.get('dash'),
         name: this.get('name'),
         timeout: this.get('timeout')
-      }).save();
+      }).save().then((page) => {
+        this.transitionToRoute('editor.dashboard.page', page.get('id'));
+      });
     }
   }
 });

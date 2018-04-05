@@ -6,7 +6,9 @@ export default Controller.extend({
     saveDashboard() {
       this.get('store').createRecord('Dashboard', {
         name: this.get('name')
-      }).save();
+      }).save().then((dash) => {
+        this.transitionToRoute('editor.dashboard', dash.get('id'));
+      });
       
     }
   }

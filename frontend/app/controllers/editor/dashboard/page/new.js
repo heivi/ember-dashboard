@@ -9,7 +9,9 @@ export default Controller.extend({
       this.get('store').createRecord('Component', {
         page: this.get('page'),
         name: this.get('name')
-      }).save();
+      }).save().then((compo) => {
+        this.transitionToRoute('editor.dashboard.page.component', compo.get('id'));
+      });;
     }
   }
 });
