@@ -1,8 +1,14 @@
+<div class="text-center">
+  <h1>-board builder</h1>
+</div>
+
 {{!-- Luodaan valikko sivun yläreunaan --}}
 {{navigation-tabs route=currentRoute}}
 
 <div class="content-fluid text-center">
-<h4>Ei vielä mittään</h4>
-
-{{outlet}}
+<h4>Omat kojetaulut</h4>
+{{#each model as |dash|}}
+{{#link-to 'dashview.dashboard' dash.id}}{{dash.name}}{{/link-to}}
+{{/each}}
 </div>
+{{outlet}}

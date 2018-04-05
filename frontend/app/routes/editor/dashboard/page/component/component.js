@@ -6,6 +6,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
     this.set('page',this.modelFor("editor/dashboard/page"));
     
     return this.get('page.components').then((components) => {
+      console.log("components:");
       console.log(components);
       let fcompo = null;
       components.forEach((compo) => {
@@ -21,7 +22,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
       });
       return fcompo
     }).then((fcompo) => {
-      console.log(fcompo.toJSON());
+      if (fcompo != null) console.log(fcompo.toJSON());
       return fcompo;
     });
     
@@ -30,5 +31,20 @@ export default Route.extend(AuthenticatedRouteMixin, {
         return page.get('id') == params.page_id;
       });
     });*/
+  },
+  setupController(controller, model) {
+    this._super(controller, model);
+    if (model != null) {
+      controller.set('name', model.get('name'));
+      controller.set('minWidth', model.get('minWidth'));
+      controller.set('minHeight', model.get('minHeight'));
+      controller.set('height', model.get('height'));
+      controller.set('width', model.get('width'));
+      controller.set('type', model.get('type'));
+      controller.set('public', model.get('public'));
+      controller.set('componentData', model.get('componentData'));
+      controller.set('triggers', model.get('triggers'));
+      controller.set('classes', model.get('classes'));
+    }
   }
 });

@@ -1,5 +1,5 @@
 import EditorController from '../editor';
-import { computed } from '@ember/object';
+//import { computed } from '@ember/object';
 
 export default EditorController.extend({
   /*empty: computed('model', function() {

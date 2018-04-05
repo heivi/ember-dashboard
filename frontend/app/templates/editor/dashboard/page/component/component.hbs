@@ -1,0 +1,37 @@
+
+<div class="content-fluid text-center">
+  <h4>Komponentti: {{model.name}}</h4>
+  <label for="name">nimi</label>
+  {{input type="text" value=name name="name" placeholder="Nimi" class="form-control"}}
+  <br>
+  <label for="minWidth">minimileveys</label>
+  {{input type="text" value=minWidth name="minWidth" placeholder="minWidth" class="form-control"}}
+  <br>
+  <label for="minHeight">minimikorkeus</label>
+  {{input type="text" value=minHeight name="minHeight" placeholder="minHeight" class="form-control"}}
+  <br>
+  <label for="height">korkeus</label>
+  {{input type="text" value=height name="height" placeholder="height" class="form-control"}}
+  <br>
+  <label for="width">leveys</label>
+  {{input type="text" value=width name="width" placeholder="width" class="form-control"}}
+  <br>
+  <label for="type">tyyppi</label>
+  {{input type="text" value=type name="type" placeholder="type" class="form-control"}}
+  <br>
+  <label for="public">julkinen</label>
+  {{input type="checkbox" checked=public name="public" class="form-control"}}
+  <br>
+  <label for="classes">css-luokat</label>
+  {{input type="text" value=classes name="classes" placeholder="classes" class="form-control"}}
+  <br>
+  <label for="componentData">sisältö</label>
+  {{textarea value=componentData name="componentData" rows="12" class="form-control"}}
+  <br>
+  <label for="triggers">liipaisimet</label>
+  {{textarea value=triggers name="triggers" rows="12" class="form-control"}}
+  <br>
+  <button type="button" class="btn btn-primary" {{action "updateComponent"}}>Tallenna</button>
+</div>
+
+{{outlet}}

@@ -18,14 +18,19 @@ Router.map(function() {
       this.route('page', { path: '/:page_id' }, function() {
         this.route('component', function() {
           this.route('new');
+          this.route('component', { path: '/:component_id' });
         });
-        this.route('component', { path: '/:component_id' });
+        
       });
     });
 
     
   });
   this.route('logout');
+
+  this.route('dashview', function() {
+    this.route('dashboard', { path: '/:dashboard_id' });
+  });
 });
 
 export default Router;

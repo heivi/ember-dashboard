@@ -1,0 +1,127 @@
+<style>
+body, html {
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	/*overflow: hidden;*/
+	position: absolute;
+	background-color: black;
+	color: white;
+}
+
+body > div, .page {
+	z-index: 10;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.hidden1 {
+	transition: 1s;
+	left: -101%;
+	z-index: 0;
+}
+
+.hidden {
+	left: 101%;
+	z-index: 0;
+}
+
+.active {
+	transition: 1s;
+	display: block;
+	left: 0;
+	z-index: 10;
+}
+
+.full {
+	width: 100%;
+	height: 100%;
+	object-fit: contain !important;
+}
+
+.center {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.tcenter {
+	text-align: center;
+}
+
+.black {
+	background-color: black;
+}
+
+</style>
+<script>
+var triggers = {};
+var activepage = 0;
+setInterval(function() {
+  //console.log("Test!");
+  //console.log($(".triggers"));
+  $(".triggers [data-page='"+activepage+"']").each((i, trigger) => {
+    eval(trigger.innerHTML);
+  });
+  
+  //alert("test!");
+}, 10000);
+
+var prevpage = 0;
+var pages = 0;
+var prevchange = 0;
+setTimeout(() => {
+  pages = $(".page").length;
+  if (pages > 0) {
+    $(".page").eq(activepage).addClass("active").removeClass("hidden");
+    prevpage = activepage;
+    prevchange = new Date().getTime();
+  }
+  
+  setInterval(() => {nextPage(prevchange+parseInt($(".page").eq(activepage).data('timeout'))*1000);}, 1000);
+  
+  
+},1000);
+
+function nextPage(changeTime) {
+  if ( changeTime > new Date().getTime() ) {
+    return;
+  }
+  pages = $(".page").length;
+  if (pages > activepage+1) {
+    activepage++;
+  } else if (pages > 1) {
+    activepage = 0;
+  }
+  
+  if (pages > 0) {
+    $(".page").eq(prevpage).addClass("hidden1").removeClass("active");
+    $(".page").eq(activepage).addClass("active").removeClass("hidden");
+    prevpage = activepage;
+    prevchange = new Date().getTime();
+  }
+}
+
+$("body").on("transitionend", ".hidden1", (evt) => {
+	$(evt.target).addClass("hidden").removeClass("hidden1");
+});
+
+</script>
+{{#each model.pages as |page pagein|}}
+<div class="page hidden {{page.classes}}" data-timeout="{{page.timeout}}">
+  <h6 style="position: fixed">{{page.name}}</h6>
+  {{#each page.components as |c|}}
+    <script class="triggers" data-page="{{pagein}}">
+    {{{c.triggers}}}
+    </script>
+    <div class="component {{c.classes}}" style="position: absolute; min-width: {{c.minWidth}}; min-height: {{c.minHeight}}; height: {{c.height}}; width: {{c.width}};">
+      {{{c.componentData}}}
+    </div>
+  {{/each}}
+</div>
+{{/each}}
+
+{{outlet}}

@@ -18,7 +18,7 @@ router.get('/', passport.authenticate('bearer', { session: false }), function (r
   Dashboard.find({'userId': req.user.userId}, null).
     populate({
       path: 'pages',
-      populate: { path: 'components'}
+      populate: { path: 'components', model: 'Component'}
     }).exec(function (err, dashboards) {
     if (!err) {
       console.log(dashboards);

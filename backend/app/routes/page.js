@@ -18,7 +18,7 @@ router.post('/', passport.authenticate('bearer', { session: false }), function (
   Dashboard.findOne({'userId': req.user.userId, '_id': req.body.page.dashboard}, null).
   populate({
     path: 'pages',
-    populate: { path: 'components'}
+    populate: { path: 'components', model: 'Component'}
   }).
   exec(function (err, dashboards) {
     if (!err) {
@@ -50,6 +50,91 @@ router.post('/', passport.authenticate('bearer', { session: false }), function (
     }
   });
 
+});
+
+router.put('/:id', passport.authenticate('bearer', { session: false }), function (req, res) {
+
+  console.log("Updating page");
+  console.log(req.user.userId);
+  console.log(req.body);
+  console.log(req.query);
+  console.log(req.params);
+  
+  Page.findOne({'_id': req.params.id}, null).
+  populate({
+    path: 'components'
+  }).populate({
+    path: 'dashboard'
+  }).
+  exec(function(err, page) {
+    if (err) {
+      res.statusCode = 500;
+      log.error('Internal error(%d): %s',res.statusCode,err.message);
+      return res.json({
+        errors: ['Server error']
+      });
+    } else {
+      
+      if (page.dashboard.userId != req.user.userId) {
+        console.log("Not your dashboard!");
+        res.statusCode = 401;
+        return res.json({
+          errors: ['Not your dashboard']
+        });
+      }
+      page.name = req.body.page.name;
+      page.timeout = req.body.page.timeout;
+      page.number = req.body.page.number;
+      page.classes = req.body.page.classes;
+      page.save().then(() => {
+        page.dashboard = page.dashboard._id;
+        return res.json({pages: page});
+      }).catch((error) => {
+        res.statusCode = 500;
+        log.error('Internal error(%d): %s',res.statusCode,error.message);
+        return res.json({
+          errors: ['Server error']
+        });
+      });
+    }
+  });
+});
+
+router.get('/:id', passport.authenticate('bearer', { session: false }), function (req, res) {
+
+  var limit = req.query.limit || null;
+  var offset = req.query.offset || null;
+
+  console.log("Getting pages and components:");
+  console.log(req.user.userId);
+
+  Page.findOne({'_id': req.params.id}, null).
+    populate({
+      path: 'dashboard'
+    }).populate({
+      path: 'components'
+    }).exec(function (err, page) {
+    if (!err) {
+      console.log(page);
+      if (page.dashboard.userId != req.user.userId) {
+        console.log("Not your dashboard!");
+        res.statusCode = 401;
+        return res.json({
+          errors: ['Not your dashboard']
+        });
+      }
+      console.log(JSON.stringify(page));
+      page.dashboard = page.dashboard._id;
+      return res.json({pages: page});
+      //return res.json({data: dashboards, meta: {}});
+    } else {
+      res.statusCode = 500;
+      log.error('Internal error(%d): %s',res.statusCode,err.message);
+      return res.json({
+        errors: ['Server error']
+      });
+    }
+  });
 });
 
 module.exports = router;

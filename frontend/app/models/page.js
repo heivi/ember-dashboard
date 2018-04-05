@@ -5,5 +5,7 @@ export default DS.Model.extend({
   components: DS.hasMany('component'),
   number: DS.attr('number'),
   dashboard: DS.belongsTo('dashboard'),
-  name: DS.attr('string')
+  name: DS.attr('string'),
+  timeout: DS.attr('number'),
+  classes: DS.attr('string')
 });

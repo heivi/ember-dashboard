@@ -22,6 +22,12 @@ var Page = new Schema({
   },
   name: {
     type: String
+  },
+  classes: {
+    type: String
+  },
+  timeout: {
+    type: Number
   }
 });
 

@@ -21,7 +21,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
       });
       return fpage
     }).then((fpage) => {
-      console.log(fpage.toJSON());
+      if (fpage != null) console.log(fpage.toJSON());
       return fpage;
     });
     
@@ -30,5 +30,15 @@ export default Route.extend(AuthenticatedRouteMixin, {
         return page.get('id') == params.page_id;
       });
     });*/
+  },
+  setupController(controller, model) {
+    this._super(controller, model);
+    if (model != null) {
+      console.log("Setting controller");
+      console.log(controller);
+      controller.set('name', model.get('name'));
+      controller.set('timeout', model.get('timeout'));
+      controller.set('number', model.get('number'));
+    }
   }
 });
