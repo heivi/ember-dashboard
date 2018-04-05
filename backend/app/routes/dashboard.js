@@ -59,4 +59,30 @@ router.post('/', passport.authenticate('bearer', { session: false }), function (
 
 });
 
+router.get('/:id', passport.authenticate('bearer', { session: false }), function (req, res) {
+
+  var limit = req.query.limit || null;
+  var offset = req.query.offset || null;
+
+  console.log("Getting pages and components:");
+  console.log(req.user.userId);
+
+  Dashboard.find({'userId': req.user.userId, '_id': req.params.id}, null).
+    populate({
+      path: 'pages',
+      populate: { path: 'components'}
+    }).exec(function (err, dashboards) {
+    if (!err) {
+      return res.json({dashboards: dashboards});
+      //return res.json({data: dashboards, meta: {}});
+    } else {
+      res.statusCode = 500;
+      log.error('Internal error(%d): %s',res.statusCode,err.message);
+      return res.json({
+        errors: ['Server error']
+      });
+    }
+  });
+});
+
 module.exports = router;

@@ -5,7 +5,7 @@
   {{else}}
     {{log model}}
     {{#each model as |dash|}}
-    {{#link-to 'editor'}}{{dash.name}}{{/link-to}}
+    {{#link-to 'editor.dashboard' dash.id}}{{dash.name}}{{/link-to}}
     {{/each}}
   {{/if}}
   <br/><br/>  

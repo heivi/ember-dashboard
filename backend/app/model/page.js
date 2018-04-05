@@ -11,7 +11,8 @@ var Page = new Schema({
   components: [{
     type: Schema.Types.ObjectId,
     ref: 'Component'
-  }]
+  }],
+  number: Number
 });
 
 Page.plugin(renameIdPlugin({newIdName: 'id'}));
