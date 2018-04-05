@@ -11,7 +11,7 @@ export default Controller.extend({
         name: this.get('name')
       }).save().then((compo) => {
         this.transitionToRoute('editor.dashboard.page.component', compo.get('id'));
-      });;
+      });
     }
   }
 });

@@ -122,4 +122,41 @@ router.delete('/:id', passport.authenticate('bearer', { session: false }), funct
   });
 });
 
+router.put('/:id', passport.authenticate('bearer', { session: false }), function (req, res) {
+
+  console.log("Updating dashboard");
+  console.log(req.user.userId);
+  console.log(req.body);
+  console.log(req.query);
+  console.log(req.params);
+  
+  Dashboard.findOne({'userId': req.user.userId, '_id': req.params.id}, null).
+  populate({
+    path: 'pages'
+  }).
+  exec(function(err, dash) {
+    if (err) {
+      res.statusCode = 500;
+      log.error('Internal error(%d): %s',res.statusCode,err.message);
+      return res.json({
+        errors: ['Server error']
+      });
+    } else {
+      
+      
+      dash.name = req.body.dashboard.name;
+      
+      dash.save().then(() => {
+        return res.json({dashboards: dash});
+      }).catch((error) => {
+        res.statusCode = 500;
+        log.error('Internal error(%d): %s',res.statusCode,error.message);
+        return res.json({
+          errors: ['Server error']
+        });
+      });
+    }
+  });
+});
+
 module.exports = router;

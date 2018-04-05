@@ -63,7 +63,8 @@ var activepage = 0;
 setInterval(function() {
   //console.log("Test!");
   //console.log($(".triggers"));
-  $(".triggers [data-page='"+activepage+"']").each((i, trigger) => {
+  //console.log($(".triggers [data-page='"+activepage+"']"));
+  $("[data-page='"+activepage+"'].triggers").each((i, trigger) => {
     eval(trigger.innerHTML);
   });
   
