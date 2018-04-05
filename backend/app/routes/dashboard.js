@@ -21,6 +21,7 @@ router.get('/', passport.authenticate('bearer', { session: false }), function (r
       populate: { path: 'components'}
     }).exec(function (err, dashboards) {
     if (!err) {
+      console.log(dashboards);
       return res.json({dashboards: dashboards});
       //return res.json({data: dashboards, meta: {}});
     } else {
@@ -77,9 +78,10 @@ router.get('/:id', passport.authenticate('bearer', { session: false }), function
   Dashboard.find({'userId': req.user.userId, '_id': req.params.id}, null).
     populate({
       path: 'pages',
-      populate: { path: 'components'}
+      populate: { path: 'components', model: 'Component'}
     }).exec(function (err, dashboards) {
     if (!err) {
+      console.log(JSON.stringify(dashboards));
       return res.json({dashboards: dashboards});
       //return res.json({data: dashboards, meta: {}});
     } else {

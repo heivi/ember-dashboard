@@ -18,7 +18,10 @@ var Component = new Schema({
   name: String,
   public: Boolean,
   triggers: {},
-  
+  page: {
+    type: Schema.Types.ObjectId,
+    ref: 'Page'
+  }
 });
 
 Component.plugin(renameIdPlugin({newIdName: 'id'}));

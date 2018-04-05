@@ -16,6 +16,9 @@ Router.map(function() {
         this.route('new');
       });
       this.route('page', { path: '/:page_id' }, function() {
+        this.route('component', function() {
+          this.route('new');
+        });
         this.route('component', { path: '/:component_id' });
       });
     });

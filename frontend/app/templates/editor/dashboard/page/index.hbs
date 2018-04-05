@@ -1,0 +1,11 @@
+
+<div class="content-fluid text-center">
+  <h4>Sivu: {{model.name}}</h4>
+  {{#each model.components as |component|}}
+  {{#link-to 'editor.dashboard.page.component' component.id}}{{component.name}}{{/link-to}}
+  <br>
+  {{/each}}
+  {{#link-to 'editor.dashboard.page.component.new' }}Luo uusi komponenetti{{/link-to}}
+</div>
+
+{{outlet}}
