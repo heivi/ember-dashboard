@@ -6,7 +6,7 @@ export default Controller.extend({
       this.get('session').authenticate('authenticator:custom', {})
       .then((data) => {
         console.log(data);
-        alert('SUCCESS ' + JSON.stringify(this.get('session.data')));
+        //alert('SUCCESS ' + JSON.stringify(this.get('session.data')));
         this.transitionToRoute("index");
       }).catch((err) => {
         console.error(err);

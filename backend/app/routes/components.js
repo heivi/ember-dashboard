@@ -10,11 +10,11 @@ var Component = require(__base + 'app/model/component');
 
 router.post('/', passport.authenticate('bearer', { session: false }), function (req, res) {
 
-  console.log("Saving component");
-  console.log(req.user.userId);
-  console.log(req.body);
-  console.log(req.query);
-  console.log(req.params);
+  //console.log("Saving component");
+  //console.log(req.user.userId);
+  //console.log(req.body);
+  //console.log(req.query);
+  //console.log(req.params);
   
   Page.findOne({'_id': req.body.component.page}, null).
   populate({
@@ -43,8 +43,8 @@ router.post('/', passport.authenticate('bearer', { session: false }), function (
         page: page._id,
         name: req.body.component.name
       }).then((component) => {
-        console.log(page);
-        console.log(component);
+        //console.log(page);
+        //console.log(component);
         page.components.push(component);
         page.save().then(() => {
           return res.json({components: component});
@@ -63,11 +63,11 @@ router.post('/', passport.authenticate('bearer', { session: false }), function (
 
 router.put('/:id', passport.authenticate('bearer', { session: false }), function (req, res) {
 
-  console.log("Updating component");
-  console.log(req.user.userId);
-  console.log(req.body);
-  console.log(req.query);
-  console.log(req.params);
+  //console.log("Updating component");
+  //console.log(req.user.userId);
+  //console.log(req.body);
+  //console.log(req.query);
+  //console.log(req.params);
   
   Component.findOne({'_id': req.params.id}, null).
   populate({
@@ -136,8 +136,8 @@ router.get('/:id', passport.authenticate('bearer', { session: false }), function
   var limit = req.query.limit || null;
   var offset = req.query.offset || null;
 
-  console.log("Getting component:");
-  console.log(req.user.userId);
+  //console.log("Getting component:");
+  //console.log(req.user.userId);
 
   Component.findOne({'_id': req.params.id}, null).
     populate({
@@ -145,7 +145,7 @@ router.get('/:id', passport.authenticate('bearer', { session: false }), function
       populate: { path: 'dashboard', model: 'Dashboard'}
     }).exec(function (err, component) {
     if (!err) {
-      console.log(component);
+      //console.log(component);
       if (component.page.dashboard.userId != req.user.userId) {
         console.log("Not your dashboard!");
         res.statusCode = 401;
@@ -153,7 +153,7 @@ router.get('/:id', passport.authenticate('bearer', { session: false }), function
           errors: ['Not your dashboard']
         });
       }
-      console.log(JSON.stringify(component));
+      //console.log(JSON.stringify(component));
       component.page = component.page._id;
       return res.json({components: component});
       //return res.json({data: dashboards, meta: {}});
@@ -172,8 +172,8 @@ router.delete('/:id', passport.authenticate('bearer', { session: false }), funct
   var limit = req.query.limit || null;
   var offset = req.query.offset || null;
 
-  console.log("Getting component:");
-  console.log(req.user.userId);
+  //console.log("Getting component:");
+  //console.log(req.user.userId);
 
   Component.findOne({'_id': req.params.id}, null).
     populate({
@@ -181,7 +181,7 @@ router.delete('/:id', passport.authenticate('bearer', { session: false }), funct
       populate: { path: 'dashboard', model: 'Dashboard'}
     }).exec(function (err, component) {
     if (!err) {
-      console.log(component);
+      //console.log(component);
       if (component.page.dashboard.userId != req.user.userId) {
         console.log("Not your dashboard!");
         res.statusCode = 401;
@@ -189,11 +189,11 @@ router.delete('/:id', passport.authenticate('bearer', { session: false }), funct
           errors: ['Not your dashboard']
         });
       }
-      console.log(JSON.stringify(component));
+      //console.log(JSON.stringify(component));
       component.page = component.page._id;
       component.remove().then((removed) => {
-        console.log("removed");
-        console.log(removed);
+        //console.log("removed");
+        //console.log(removed);
         return res.json({});
       });
       //return res.json({components: component});

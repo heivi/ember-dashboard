@@ -69,7 +69,10 @@ setInterval(function() {
   });
   
   //alert("test!");
-}, 10000);
+}, 5000);
+$("[data-page='"+activepage+"'].triggers").each((i, trigger) => {
+  eval(trigger.innerHTML);
+});
 
 var prevpage = 0;
 var pages = 0;

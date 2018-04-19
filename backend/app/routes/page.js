@@ -9,11 +9,11 @@ var Page = require(__base + 'app/model/page');
 
 router.post('/', passport.authenticate('bearer', { session: false }), function (req, res) {
 
-  console.log("Saving page");
-  console.log(req.user.userId);
-  console.log(req.body);
-  console.log(req.query);
-  console.log(req.params);
+  //console.log("Saving page");
+  //console.log(req.user.userId);
+  //console.log(req.body);
+  //console.log(req.query);
+  //console.log(req.params);
   
   if (req.body.page.dashboard == null) {
     res.statusCode = 500;
@@ -35,8 +35,8 @@ router.post('/', passport.authenticate('bearer', { session: false }), function (
         dashboard: req.body.page.dashboard,
         name: req.body.page.name
       }).then((page) => {
-        console.log(dashboards);
-        console.log(page);
+        //console.log(dashboards);
+        //console.log(page);
         dashboards.pages.push(page);
         dashboards.save().then(() => {
           return res.json({pages: page});
@@ -62,11 +62,11 @@ router.post('/', passport.authenticate('bearer', { session: false }), function (
 
 router.put('/:id', passport.authenticate('bearer', { session: false }), function (req, res) {
 
-  console.log("Updating page");
-  console.log(req.user.userId);
-  console.log(req.body);
-  console.log(req.query);
-  console.log(req.params);
+  //console.log("Updating page");
+  //console.log(req.user.userId);
+  //console.log(req.body);
+  //console.log(req.query);
+  //console.log(req.params);
   
   Page.findOne({'_id': req.params.id}, null).
   populate({
@@ -113,8 +113,8 @@ router.get('/:id', passport.authenticate('bearer', { session: false }), function
   var limit = req.query.limit || null;
   var offset = req.query.offset || null;
 
-  console.log("Getting pages and components:");
-  console.log(req.user.userId);
+  //console.log("Getting pages and components:");
+  //console.log(req.user.userId);
 
   Page.findOne({'_id': req.params.id}, null).
     populate({
@@ -123,7 +123,7 @@ router.get('/:id', passport.authenticate('bearer', { session: false }), function
       path: 'components'
     }).exec(function (err, page) {
     if (!err) {
-      console.log(page);
+      //console.log(page);
       if (page.dashboard.userId != req.user.userId) {
         console.log("Not your dashboard!");
         res.statusCode = 401;
@@ -131,7 +131,7 @@ router.get('/:id', passport.authenticate('bearer', { session: false }), function
           errors: ['Not your dashboard']
         });
       }
-      console.log(JSON.stringify(page));
+      //console.log(JSON.stringify(page));
       page.dashboard = page.dashboard._id;
       return res.json({pages: page});
       //return res.json({data: dashboards, meta: {}});
@@ -150,26 +150,26 @@ router.delete('/:id', passport.authenticate('bearer', { session: false }), funct
   var limit = req.query.limit || null;
   var offset = req.query.offset || null;
 
-  console.log("Getting page:");
-  console.log(req.user.userId);
+  //console.log("Getting page:");
+  //console.log(req.user.userId);
 
   Page.findOne({'_id': req.params.id}, null).
     populate({
       path: 'dashboard'
     }).exec(function (err, page) {
     if (!err) {
-      console.log(page);
+      //console.log(page);
       if (page.dashboard.userId != req.user.userId) {
-        console.log("Not your dashboard!");
+        //console.log("Not your dashboard!");
         res.statusCode = 401;
         return res.json({
           errors: ['Not your dashboard']
         });
       }
-      console.log(JSON.stringify(page));
+      //console.log(JSON.stringify(page));
       page.remove().then((removed) => {
-        console.log("removed");
-        console.log(removed);
+        //console.log("removed");
+        //console.log(removed);
         return res.json({});
       });
       //return res.json({components: component});

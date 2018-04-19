@@ -23,7 +23,7 @@ router.get('/', passport.authenticate('bearer', { session: false }), function (r
   var limit = req.query.limit || null;
   var offset = req.query.offset || null;
 
-  console.log("Getting users:");
+  //console.log("Getting users:");
 
   var count = User.find({}, '_id').count(function(err, count) {
     //console.log(count);
@@ -49,7 +49,7 @@ router.get('/', passport.authenticate('bearer', { session: false }), function (r
 
 router.post('/', passport.authenticate('bearer', { session: false }), function(req, res) {
 
-  console.log(req.authInfo);
+  //console.log(req.authInfo);
 
   if (!req.authInfo || req.authInfo.scope != "*" || req.authInfo.scope != "admin") {
     console.log("No right to create user");

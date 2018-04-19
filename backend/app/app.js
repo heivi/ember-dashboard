@@ -40,7 +40,7 @@ app.all('*', function(req, res, next) {
 
 app.use('/', api);
 app.use('/api', api);
-app.use('/api/users', users);
+//app.use('/api/users', users);
 app.use('/api/auth', auth);
 app.use('/api/dashboards', dashboard);
 app.use('/api/pages', page);

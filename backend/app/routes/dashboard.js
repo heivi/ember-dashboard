@@ -12,8 +12,8 @@ router.get('/', passport.authenticate('bearer', { session: false }), function (r
   var limit = req.query.limit || null;
   var offset = req.query.offset || null;
 
-  console.log("Getting pages and components:");
-  console.log(req.user.userId);
+  //console.log("Getting pages and components:");
+  //console.log(req.user.userId);
 
   Dashboard.find({'userId': req.user.userId}, null).
     populate({
@@ -21,7 +21,7 @@ router.get('/', passport.authenticate('bearer', { session: false }), function (r
       populate: { path: 'components', model: 'Component'}
     }).exec(function (err, dashboards) {
     if (!err) {
-      console.log(dashboards);
+      //console.log(dashboards);
       return res.json({dashboards: dashboards});
       //return res.json({data: dashboards, meta: {}});
     } else {
@@ -36,10 +36,10 @@ router.get('/', passport.authenticate('bearer', { session: false }), function (r
 
 router.post('/', passport.authenticate('bearer', { session: false }), function (req, res) {
 
-  console.log("Saving dashboard");
-  console.log(req.user.userId);
-  console.log(req.body);
-  console.log(req.query);
+  //console.log("Saving dashboard");
+  //console.log(req.user.userId);
+  //console.log(req.body);
+  //console.log(req.query);
   
   if (req.body.dashboard.name == null) {
     res.statusCode = 500;
@@ -72,8 +72,8 @@ router.get('/:id', passport.authenticate('bearer', { session: false }), function
   var limit = req.query.limit || null;
   var offset = req.query.offset || null;
 
-  console.log("Getting pages and components:");
-  console.log(req.user.userId);
+  //console.log("Getting pages and components:");
+  //console.log(req.user.userId);
 
   Dashboard.find({'userId': req.user.userId, '_id': req.params.id}, null).
     populate({
@@ -81,7 +81,7 @@ router.get('/:id', passport.authenticate('bearer', { session: false }), function
       populate: { path: 'components', model: 'Component'}
     }).exec(function (err, dashboards) {
     if (!err) {
-      console.log(JSON.stringify(dashboards));
+      //console.log(JSON.stringify(dashboards));
       return res.json({dashboards: dashboards});
       //return res.json({data: dashboards, meta: {}});
     } else {
@@ -99,15 +99,15 @@ router.delete('/:id', passport.authenticate('bearer', { session: false }), funct
   var limit = req.query.limit || null;
   var offset = req.query.offset || null;
 
-  console.log("Getting page:");
-  console.log(req.user.userId);
+  //console.log("Getting page:");
+  //console.log(req.user.userId);
 
   Dashboard.findOne({'userId': req.user.userId, '_id': req.params.id}, null).
     exec(function (err, dash) {
     if (!err) {
       dash.remove().then((removed) => {
-        console.log("removed");
-        console.log(removed);
+        //console.log("removed");
+        //console.log(removed);
         return res.json({});
       });
       //return res.json({components: component});
@@ -124,11 +124,11 @@ router.delete('/:id', passport.authenticate('bearer', { session: false }), funct
 
 router.put('/:id', passport.authenticate('bearer', { session: false }), function (req, res) {
 
-  console.log("Updating dashboard");
-  console.log(req.user.userId);
-  console.log(req.body);
-  console.log(req.query);
-  console.log(req.params);
+  //console.log("Updating dashboard");
+  //console.log(req.user.userId);
+  //console.log(req.body);
+  //console.log(req.query);
+  //console.log(req.params);
   
   Dashboard.findOne({'userId': req.user.userId, '_id': req.params.id}, null).
   populate({
