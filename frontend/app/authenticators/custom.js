@@ -39,12 +39,12 @@ export default OAuth2PasswordGrantAuthenticator.extend({
     }
     return new RSVP.Promise((resolve) => {
       // logout of FB
-      FB.logout((resp) => {});
+      window.FB.logout();
       if (isEmpty(serverTokenRevocationEndpoint)) {
         success.apply(this, [resolve]);
       } else {
         const requests = [];
-        A(['access_token', 'refresh_token']).forEach((tokenType) => {
+        ['access_token', 'refresh_token'].forEach((tokenType) => {
           const token = data[tokenType];
           if (!isEmpty(token)) {
             requests.push(this.makeRequest(serverTokenRevocationEndpoint, {
