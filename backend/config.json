@@ -4,7 +4,7 @@
     "tokenLife" : 86400
   },
   "mongoose": {
-    "uri": "mongodb://frontend:frontpass@localhost/dashboardDB"
+    "uri": "mongodb://localhost/dashboardDB"
   },
   "default": {
     "api": {

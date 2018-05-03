@@ -422,7 +422,7 @@ if (typeof(Highcharts) != 'undefined' && typeof(highcloaded) == 'undefined') {
 
   // Create the chart with the first datafetch
   $.ajax({
-    url: "http://api.openweathermap.org/data/2.5/forecast?id=634963&units=metric&appid=ce26a83b9f50ebb0c052b891d8e3a087",
+    url: "https://api.openweathermap.org/data/2.5/forecast?id=634963&units=metric&appid=ce26a83b9f50ebb0c052b891d8e3a087",
     success: function(data) {
       window.meteogram = new Meteogram(data, 'container');
       // last updatetime
@@ -439,7 +439,7 @@ if (typeof(Highcharts) != 'undefined' && typeof(highcloaded) == 'undefined') {
 if ((prevowmupdate + 15* 60 * 1000) < new Date().getTime()) {
   if (typeof(window.meteogram) != 'undefined') {
     $.ajax({
-      url: "http://api.openweathermap.org/data/2.5/forecast?id=634963&units=metric&appid=ce26a83b9f50ebb0c052b891d8e3a087",
+      url: "https://api.openweathermap.org/data/2.5/forecast?id=634963&units=metric&appid=ce26a83b9f50ebb0c052b891d8e3a087",
       success: function(data) {
         window.meteogram.data = data;
         window.meteogram.parseWeatherData();

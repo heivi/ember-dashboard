@@ -9,7 +9,7 @@ var app = require(__base + 'app/app');
 
 app.set('port', config.get('port') || 3000);
 
-var server = app.listen(app.get('port'), function() {
+var server = app.listen(app.get('port'), '127.0.0.1', function() {
   debug('Express server listening on port ' + server.address().port);
   log.info('Express server listening on port ' + config.get('port'));
 });
